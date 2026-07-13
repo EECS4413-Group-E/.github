@@ -6,15 +6,6 @@ Use Node LTS 24.17.0 and Java 26.0.1.
 - Frontend: React 19.2.6  
 - Database: MySQL
 
-If you need to run a Spring Boot microservice without the DB set up and it throws datasource/database errors, replace the `@SpringBootApplication` annotation in the main class with:
-
-```java
-@SpringBootApplication(exclude = {
-    DataSourceAutoConfiguration.class,
-    HibernateJpaAutoConfiguration.class
-})
-```
-
 ## Repositories
 - [fabrik-ui](https://github.com/EECS4413-Group-E/fabrik-ui) — Frontend React application (TypeScript/React) for the web ui.
 - [gateway](https://github.com/EECS4413-Group-E/gateway) — API gateway (Java/Spring Boot) routing requests to the microservices.  
@@ -38,27 +29,33 @@ If you need to run a Spring Boot microservice without the DB set up and it throw
 4. Create the auth, user, product, and order db schemas in your local database:
    ```sql
     CREATE SCHEMA `auth` ;
-    CREATE SCHEMA `user` ;
-    CREATE SCHEMA `product`;
+    CREATE SCHEMA `catalogue`;
     CREATE SCHEMA `order`;
+    CREATE SCHEMA `payment`;
+    CREATE SCHEMA `user` ;
    ```
 5. For each schema, create an admin user that will be used to access the database (by you and the microservices). Run the following script from your root mysql user and replace password with the schema you are making the user for and a custom password for you to use.
    ```sql
    CREATE USER 'auth_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
    GRANT ALL PRIVILEGES ON `auth`.* TO 'auth_admin'@'localhost' WITH GRANT OPTION;
-
-   CREATE USER 'user_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
-   GRANT ALL PRIVILEGES ON `user`.* TO 'user_admin'@'localhost' WITH GRANT OPTION;
-
-   CREATE USER 'product_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
-   GRANT ALL PRIVILEGES ON `product`.* TO 'product_admin'@'localhost' WITH GRANT OPTION;
+   
+   CREATE USER 'catalogue_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
+   GRANT ALL PRIVILEGES ON `catalogue`.* TO 'catalogue_admin'@'localhost' WITH GRANT OPTION;
 
    CREATE USER 'order_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
    GRANT ALL PRIVILEGES ON `order`.* TO 'order_admin'@'localhost' WITH GRANT OPTION;
+
+   CREATE USER 'payment_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
+   GRANT ALL PRIVILEGES ON `product`.* TO 'product_admin'@'localhost' WITH GRANT OPTION;
+
+   CREATE USER 'user_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
+   GRANT ALL PRIVILEGES ON `user`.* TO 'user_admin'@'localhost' WITH GRANT OPTION;
    ```
 6. When working on a microservice, make sure to create a run configuration that will launch the main springboot java file and configure environment variables for the `DB_URL` (localhost), `<schema>_DB_USERNAME`, and `<schema>_DB_PASSWORD` as you configured in the step above to match the variables in the application.properties file.
    - Example for the authservice in Intellij Idea:
      <img width="1418" height="1034" alt="image" src="https://github.com/user-attachments/assets/0fcfac30-9299-41ab-8f58-5b678de72a5d" />
+
+7. For running the full system, including the gateway and auth service, you will need the private-key.pem and publick-key.pem files. For these files, you can generate them locally using the openssl utility or reach out to me personally for these files. Add the path to public-key.pem as JWT_PUBLIC_KEY_PATH in gateway service and the path to private-key.pem as JWT_PRIVATE_KEY_PATH in the auth service.
 
 
 ## Making and Commiting Changes
