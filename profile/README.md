@@ -32,6 +32,7 @@ Use Node LTS 24.17.0 and Java 26.0.1.
     CREATE SCHEMA `catalogue`;
     CREATE SCHEMA `order`;
     CREATE SCHEMA `payment`;
+    CREATE SCHEMA `shipping`;
     CREATE SCHEMA `user` ;
    ```
 5. For each schema, create an admin user that will be used to access the database (by you and the microservices). Run the following script from your root mysql user and replace password with the schema you are making the user for and a custom password for you to use.
@@ -47,6 +48,9 @@ Use Node LTS 24.17.0 and Java 26.0.1.
 
    CREATE USER 'payment_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
    GRANT ALL PRIVILEGES ON `product`.* TO 'product_admin'@'localhost' WITH GRANT OPTION;
+   
+   CREATE USER 'shipping_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
+   GRANT ALL PRIVILEGES ON `shipping`.* TO 'shipping_admin'@'localhost' WITH GRANT OPTION;
 
    CREATE USER 'user_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
    GRANT ALL PRIVILEGES ON `user`.* TO 'user_admin'@'localhost' WITH GRANT OPTION;
