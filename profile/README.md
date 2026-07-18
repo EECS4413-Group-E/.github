@@ -59,7 +59,7 @@ Use Node LTS 24.17.0 and Java 26.0.1.
    - Example for the authservice in Intellij Idea:
      <img width="1418" height="1034" alt="image" src="https://github.com/user-attachments/assets/0fcfac30-9299-41ab-8f58-5b678de72a5d" />
 
-7. For running the full system, including the gateway and auth service, you will need the private-key.pem and publick-key.pem files. For these files, you can generate them locally using the openssl utility or reach out to me personally for these files. Add the path to public-key.pem as JWT_PUBLIC_KEY_PATH in gateway service and the path to private-key.pem as JWT_PRIVATE_KEY_PATH in the auth service.
+7. For running the full system, including the gateway and auth service, you will need the private-key.pem and publick-key.pem files. For these files, you can generate them locally using the openssl utility or reach out to me personally for these files. Add the path to public-key.pem as JWT_PUBLIC_KEY_PATH environment variable in gateway service and the path to private-key.pem as JWT_PRIVATE_KEY_PATH environment variable in the auth service.
 
 
 ## Making and Commiting Changes
