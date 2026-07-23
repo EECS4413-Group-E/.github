@@ -47,7 +47,7 @@ Use Node LTS 24.17.0 and Java 26.0.1.
    GRANT ALL PRIVILEGES ON `order`.* TO 'order_admin'@'localhost' WITH GRANT OPTION;
 
    CREATE USER 'payment_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
-   GRANT ALL PRIVILEGES ON `product`.* TO 'product_admin'@'localhost' WITH GRANT OPTION;
+   GRANT ALL PRIVILEGES ON `payment`.* TO 'payment_admin'@'localhost' WITH GRANT OPTION;
    
    CREATE USER 'shipping_admin'@'localhost' IDENTIFIED BY 'REPLACE_WITH_NEW_PASSWORD';
    GRANT ALL PRIVILEGES ON `shipping`.* TO 'shipping_admin'@'localhost' WITH GRANT OPTION;
